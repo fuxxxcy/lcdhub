@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import { ProjectPage } from "@/pages";
-import { ProjectPageLoader } from "@utils/loaders";
+import { ProjectPage, ProjectsPage } from "@pages";
+import { ProjectPageLoader, ProjectsPageLoader } from "@utils/loaders";
 import { Loader } from "@utils/types/Loader";
 
 const apiLink = "http://localhost:4000";
@@ -10,6 +10,11 @@ const AppRoutes = createBrowserRouter([
     path: "/",
     element: <div>Home page</div>,
     errorElement: <div>wrong link</div>
+  },
+  {
+    path: "/projects",
+    element: <ProjectsPage />,
+    loader: async () => await ProjectsPageLoader({link: apiLink} satisfies Loader)
   },
   {
     path: "/project/:id",

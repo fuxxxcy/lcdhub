@@ -7,7 +7,6 @@ interface LoaderDataProps {
 }
 
 export default function ProjectPage() {
-
   const LoaderData = useLoaderData();
   const [projectData, setProjectData] = useState<FullProject>();
 

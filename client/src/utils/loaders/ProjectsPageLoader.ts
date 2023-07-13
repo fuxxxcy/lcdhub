@@ -2,10 +2,10 @@ import { FullProject } from "@utils/types/FullProject";
 import { Loader } from "@utils/types/Loader";
 import axios from "axios";
 
-const ProjectPageLoader = async ({params, link}: Loader) => {
+const ProjectsPageLoader = async ({link}: Loader) => {
   try {
     const { data } = await axios.get<FullProject>(
-      `${link}/project/${params!!.id}`,
+      `${link}/projects`,
       {
         headers: {
           Accept: 'application/json',
@@ -25,4 +25,4 @@ const ProjectPageLoader = async ({params, link}: Loader) => {
   }
 };
 
-export default ProjectPageLoader;
+export default ProjectsPageLoader;
