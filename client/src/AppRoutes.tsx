@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { ProjectPage, ProjectsPage } from "@pages";
 import { ProjectPageLoader, ProjectsPageLoader } from "@utils/loaders";
 import { Loader } from "@utils/types/Loader";
@@ -8,7 +8,7 @@ const apiLink = "http://localhost:4000";
 const AppRoutes = createBrowserRouter([
   {
     path: "/",
-    element: <div>Home page</div>,
+    element: <Navigate to="/projects"/>,
     errorElement: <div>wrong link</div>
   },
   {
