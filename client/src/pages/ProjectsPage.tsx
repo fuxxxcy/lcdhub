@@ -1,3 +1,5 @@
+import Body from "@components/Body";
+import Header from "@components/Header";
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
@@ -14,21 +16,23 @@ export default function ProjectsPage() {
   }, [LoaderData]);
 
   return (
-    <div className="flex flex-col items-center">
-      {
+    <div style={{display: "flex", flexDirection: "column"}}>
+      <Header/>
+      <Body/>
+      {/* {
         LoaderData === undefined ? <span>loading...</span> : 
         projects === undefined ? <span>no data here</span> : 
         projects.map((project, idx) => {
-          return <a key={idx} href={`project/${project.id}`} className="flex flex-row rounded-3xl w-3/5 p-2.5 m-5 border-2 border-black gap-x-2.5">
-            <img src={project.image} alt="" className="aspect-square w-2/12 rounded-2xl" />
+          return <a key={idx} href={`project/${project.id}`} >
+            <img src={project.image} alt=""/>
             <div>
-              <span className="text-2xl font-bold">{project.name}</span>
+              <span>{project.name}</span>
               <br />
               <span>{project.description.slice(0, 100) + "..."}</span>
             </div>
           </a>
         })
-      }
+      } */}
     </div>
   );
 };
