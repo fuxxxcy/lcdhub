@@ -11,7 +11,7 @@ const query = async (req: Request, res: Response) => {
       RETURN projects
     `);
 
-    const projects: Project[] = result.records.map(record => record.get('projects').properties);
+    const projects = result.records.map(record => record.get('projects').properties) as unknown as Project;
     res.json(projects);
   } catch (error) {
     console.error('Error executing Neo4j query:', error);

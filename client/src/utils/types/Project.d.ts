@@ -4,5 +4,3 @@ type Project = {
     image: string,
     description: string
 };
-
-export default Project;

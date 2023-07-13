@@ -4,9 +4,11 @@ import bodyParser from "body-parser";
 import { getFullProject, getProjects } from "./queries/get";
 import { driver } from "./driver/Neo4j.connect";
 
+const originLink = "http://localhost:3000";
+
 const app = express();
 const corsOptions: cors.CorsOptions = {
-    origin: "http://localhost:3000"
+    origin: originLink
 };
 
 app.use(cors(corsOptions));

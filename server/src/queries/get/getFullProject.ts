@@ -22,7 +22,7 @@ const query = async (req: Request, res: Response) => {
       RETURN apoc.coll.toSet([fullProjects]) AS uniqueResults
     `);
 
-    const fullProjects = result.records.map(record => record.get('uniqueResults'));
+    const fullProjects = result.records.map(record => record.get('uniqueResults')) as unknown as FullProject;
     res.json(fullProjects);
   } catch (error) {
     console.error('Error executing Neo4j query:', error);
