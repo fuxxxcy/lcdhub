@@ -126,6 +126,8 @@
     border: 1px solid #FFF;
     background: rgba(26, 26, 37, 0.50);
     margin-top: 20.14px;
+
+    display: flex;
 }
 
 .guide_card__logo {
@@ -166,4 +168,61 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+.guide_card_secondblock {
+    display: flex;
+    flex-direction: column;
+}
+
+.guide_card__info {
+    display: flex;
+    justify-content: space-between;
+    width: 120.66px;
+    height: 15.45px;
+}
+
+.guide_card__info__time {
+    width: 52.971px;
+    height: 15.45px;
+    flex-shrink: 0;
+    border-radius: 24px;
+    background: #7CD2B0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.guide_card__info__time__logo {
+    width: 12.507px;
+    height: 12.507px;
+    flex-shrink: 0;
+}
+
+.guide_card__info__time__text {
+    display: flex;
+    align-items: center;
+
+    width: 20.6px;
+    height: 12.507px;
+    flex-shrink: 0;
+    
+    color: #1A1A25;
+    
+    text-align: center;
+    font-family: Roboto;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 1.47px 8.09px 1.47px;
+}
+
+
+
+.guide_card__info__price {
+    width: 52.971px;
+    height: 15.45px;
+    flex-shrink: 0;
+    border-radius: 24px;
+    background: #7CD2B0;
 }
