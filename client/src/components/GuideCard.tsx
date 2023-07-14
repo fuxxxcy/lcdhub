@@ -11,7 +11,7 @@ const GuideCard = () => {
         </div>
       </div>
 
-      <div className="guide_card_secondblock">
+      <div className="guide_card__secondblock">
         <div className="guide_card__info">
           <div className="guide_card__info__time">
             <div className="guide_card__info__time__logo"><TimeFrame/></div>

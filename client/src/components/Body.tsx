@@ -18,6 +18,9 @@ const Body = () => {
         <GuideCard/>
         <GuideCard/>
         <GuideCard/>
+        <GuideCard/>
+        <GuideCard/>
+        <GuideCard/>
       </div>
     </div>
   )

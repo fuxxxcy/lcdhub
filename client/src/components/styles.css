@@ -112,38 +112,45 @@
 }
 
 .guide_cards {
-    margin-top: 24.31px;
+    margin-top: 24px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    gap: 20px;
+    padding: 25px;
 }
 
 .guide_card {
     width: 309px;
-    height: 161.857px;
-    flex-shrink: 0;
+    height: 162px;
     border-radius: 24px;
     border: 1px solid #FFF;
     background: rgba(26, 26, 37, 0.50);
-    margin-top: 20.14px;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+}
 
+.guide_card > .guide_card__firstblock {
+    padding: 20px;
+    width: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .guide_card__logo {
-    width: 91.229px;
-    height: 91.229px;
+    width: 91px;
+    height: 91px;
     flex-shrink: 0;
     border-radius: 24px;
     background: lightgray 50% / cover no-repeat; 
 
-    margin-top: 18.39px;
-    margin-left: 22.07px;
 }
 
 .guide_card__button {
-    width: 91.229px;
-    height: 22.071px;
+    width: 91px;
+    height: 22px;
     flex-shrink: 0;
     border-radius: 12px;
     border: 1px solid var(--primarly);
@@ -152,14 +159,12 @@
     justify-content: center;
     align-items: center;
 
-    margin-left: 22.07px;
-    margin-top: 10.3px;
 }
 
 .guide_card__button__text {
     display: flex;
-    width: 44.143px;
-    height: 13.243px;
+    width: 44px;
+    height: 13px;
     flex-shrink: 0;
     color: var(--primarly);
     text-align: center;
@@ -170,21 +175,23 @@
     line-height: normal;
 }
 
-.guide_card_secondblock {
+.guide_card__secondblock {
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .guide_card__info {
     display: flex;
-    justify-content: space-between;
-    width: 120.66px;
-    height: 15.45px;
+    justify-content: flex-end;
+    width: 121px;
+    height: 15px;
 }
 
 .guide_card__info__time {
-    width: 52.971px;
-    height: 15.45px;
+    margin-right: 10px;
+    width: 53px;
+    height: 15px;
     flex-shrink: 0;
     border-radius: 24px;
     background: #7CD2B0;
@@ -220,6 +227,7 @@
 
 
 .guide_card__info__price {
+    margin-right: 10px;
     width: 52.971px;
     height: 15.45px;
     flex-shrink: 0;
