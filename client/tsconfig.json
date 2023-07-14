@@ -6,6 +6,7 @@
       "@utils/*": ["src/utils/*"],
       "@pages/*": ["src/pages/*"],
       "@pages": ["src/pages"],
+      "@images": ["src/images"],
       "@/*": ["src/*"]
     },
     "target": "es5",

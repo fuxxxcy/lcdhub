@@ -16,7 +16,7 @@ export default function ProjectsPage() {
   }, [LoaderData]);
 
   return (
-    <div style={{display: "flex", flexDirection: "column"}}>
+    <>
       <Header/>
       <Body/>
       {/* {
@@ -33,6 +33,6 @@ export default function ProjectsPage() {
           </a>
         })
       } */}
-    </div>
+    </>
   );
 };

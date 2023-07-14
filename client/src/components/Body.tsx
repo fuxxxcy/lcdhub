@@ -1,29 +1,30 @@
-import "./styles.css";
 import GuideCard from './GuideCard';
-import Filter from "./Filter";
+import FilterPanel from "./FilterPanel";
+import GradientMouse from './GradientMouse';
+
+let demonstrate: Project = {
+  id: "123",
+  name: "Крутое имя",
+  image: "123",
+  description: "Крутое длинное описание, которое я не знаю зачем пишу, ведь всё равно обрежу его."
+}
 
 const Body = () => {
   return (
-    <div className='body'>
-      <div className='body_filters'>
-        <Filter />
-        <div className="body_search">
-          <form>
-            <div className="body_search__text">Поиск</div>
-          </form>
-        </div>
-      </div>
+    <>
+      <GradientMouse />
+      <FilterPanel />
 
       <div className="guide_cards">
-        <GuideCard/>
-        <GuideCard/>
-        <GuideCard/>
-        <GuideCard/>
-        <GuideCard/>
-        <GuideCard/>
+        <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
+        <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
+        <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
+        <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
+        <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
+        <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
       </div>
-    </div>
-  )
+    </>
+  );
 };
 
 export default Body;
