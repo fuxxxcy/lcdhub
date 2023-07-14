@@ -56,7 +56,7 @@
     font-family: Roboto;
     font-size: 16px;
     font-style: normal;
-    font-weight: ;
+    font-weight: 500;
     line-height: normal;
 }
 
@@ -112,7 +112,7 @@
 }
 
 .guide_cards {
-    margin-top: 44.45px;
+    margin-top: 24.31px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -125,7 +125,7 @@
     border-radius: 24px;
     border: 1px solid #FFF;
     background: rgba(26, 26, 37, 0.50);
-
+    margin-top: 20.14px;
 }
 
 .guide_card__logo {
