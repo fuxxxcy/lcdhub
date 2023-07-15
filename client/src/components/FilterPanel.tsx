@@ -3,9 +3,13 @@ import styled from "styled-components";
 const Panel = styled.form`
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  gap: 20px 60px;
   width: fit-content;
-  margin: 50px auto;
+  margin: 0px auto 50px;
+
+  @media (width > 768px) {
+    flex-direction: row;
+  }
 `;
 
 const FilterLayout = styled.div`
