@@ -21,15 +21,18 @@ interface CardsProps {
 const GuideCards = ({ cards }: CardsProps) => {
   return (
     <GuideCardsLayout>
-      {cards?.map(card => (
-        <GuideCard 
+      {cards?.length === 0 ? 
+      <div>No data here</div> : 
+      cards?.map(card => {
+        return <GuideCard 
           key={card.id}
           id={card.id} 
           name={card.name} 
           image={card.image} 
           description={card.description} 
+          filters={card.filters}
         />
-      ))}
+      })}
     </GuideCardsLayout>
   );
 };

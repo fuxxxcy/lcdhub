@@ -1,13 +1,14 @@
 import TimeFrame from "@/images/TimeFrame";
 import { styled } from "styled-components";
+import TextFade from "./TextFade";
 
 const GuideCardLayout = styled.div`
   width: 300px;
-  height: 150px;
+  height: 170px;
   padding: 10px;
-  border-radius: 2em;
+  border-radius: 1em;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 120px 160px;
   gap: 10px;
   
   border: 1px solid var(--primarly);
@@ -21,15 +22,14 @@ const GuideCardTitle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 `;
 
 const GuideCardLogo = styled.img`
-  width: 90px;
+  width: 100%;
   aspect-ratio: 1/1;
   flex-shrink: 0;
   border-radius: 20%;
-  background: lightgray; 
 `;
 
 const GuideCardButton = styled.a`
@@ -44,39 +44,41 @@ const GuideCardButton = styled.a`
   border: 1px solid var(--primarly);
   color: var(--primarly);
   text-align: center;
-  font-family: Roboto;
   font-size: 11px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   text-decoration: none;
+  color: var(--text-additional);
 `;
 
 const GuideCardContent = styled.div`
   width: 100%;
+  padding: 10px 0px;
   display: flex;
   flex-direction: column;
-
-  color: var(--text);
+  justify-content: space-between;
+  overflow: hidden;
 `;
 
 const GuideCardInfo = styled.div`
   width: 100%;
   height: 15px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: end;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const GuideCardInfoItem = styled.div<{color?: string}>`
-  width: 50px;
+  width: fit-content;
   height: 15px;
+  padding: 0px 4px;
   margin-right: 10px;
   border-radius: 24em;
   display: flex;
   justify-content: space-evenly;
 
-  background-color: ${props => props.color || "#7CD2B0"};
+  color: var(--text-additional);
+  background-color: ${props => props.color || "var(--primarly)"};
 `;
 
 const GuideCardInfoIcon = styled.div`
@@ -89,19 +91,26 @@ const GuideCardInfoText = styled.div`
   display: flex;
   align-items: center;
 
-  color: #1A1A25;
   text-align: center;
-  font-family: Roboto;
   font-size: 7px;
 `;
 
 const GuideCardName = styled.div`
-  font-size: 18px;
+  position: relative;
+  font-size: 16px;
   font-weight: bold;
+  color: var(--text-title);
+  overflow: hidden;
+  text-wrap: nowrap;
 `;
 
 const GuideCardDescription = styled.div`
-font-size: 14px;
+  position: relative;
+  max-height: 48px;
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 12px;
 `;
 
 const GuideCard = ({id, name, image, description}: Project) => {
@@ -115,7 +124,7 @@ const GuideCard = ({id, name, image, description}: Project) => {
       <GuideCardContent>
         <GuideCardInfo>
           <GuideCardInfoItem>
-            <TimeFrame />
+            <TimeFrame color={document.documentElement.style.getPropertyValue("--text-additional")} />
             <GuideCardInfoText>2 мин</GuideCardInfoText>
           </GuideCardInfoItem>
           <GuideCardInfoItem>
@@ -130,8 +139,14 @@ const GuideCard = ({id, name, image, description}: Project) => {
           </GuideCardInfoItem>
         </GuideCardInfo>
 
-        <GuideCardName>{name}</GuideCardName>
-        <GuideCardDescription>{description.slice(0, 57) + '...'}</GuideCardDescription>
+        <GuideCardName>
+          {name}
+          <TextFade height="100%" $isneedtofade={(name.length >= 18).toString()} />
+        </GuideCardName>
+        <GuideCardDescription>
+          {description.slice(0, 120)}
+          <TextFade height="12px" $isneedtofade={"true"} />
+        </GuideCardDescription>
       </GuideCardContent>
     </GuideCardLayout>
   );

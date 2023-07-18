@@ -2,8 +2,9 @@ import FilterPanel from "@components/FilterPanel";
 import GradientMouse from "@components/GradientMouse";
 import GuideCards from "@components/GuideCards";
 import Header from "@components/Header";
+import queryString from "query-string";
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const ProjectsPageLayout = styled.div`
@@ -11,11 +12,13 @@ const ProjectsPageLayout = styled.div`
   top: 0px;
   left: 0px;
   width: 100%;
+  min-height: 100%;
   padding: 50px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 1;
+  backdrop-filter: blur(180px);
 `;
 
 interface LoaderDataProps {
@@ -26,24 +29,31 @@ export default function ProjectsPage() {
   const LoaderData = useLoaderData();
   const [projects, setProjects] = useState<Project[]>();
 
+  const location = useLocation();
+  const queryParams = queryString.parse(location.search);
+  const filter = queryParams.filter as string | undefined;
+  const query = queryParams.query as string | undefined;
+
   useEffect(() => {
-    // LoaderData !== 'Network Error' && setProjects((LoaderData as LoaderDataProps).data);
-    LoaderData !== 'Network Error' && setProjects(
-      (LoaderData as LoaderDataProps).data
-      .concat((LoaderData as LoaderDataProps).data)
-      .concat((LoaderData as LoaderDataProps).data)
-      .concat((LoaderData as LoaderDataProps).data)
-      .concat((LoaderData as LoaderDataProps).data)
-      .concat((LoaderData as LoaderDataProps).data)
-      .concat((LoaderData as LoaderDataProps).data)
-      ); // *! delete this, this is trash for testing
-  }, [LoaderData]);
+    if (LoaderData === 'Network Error')  return;
+
+    const { data } = LoaderData as LoaderDataProps;
+
+    const cards: Project[] = data.filter((card) => {
+      const filterMatch = filter === "all" || filter === undefined || card.filters.includes(filter);
+      const queryMatch = query === undefined || card.name.includes(query);
+
+      return filterMatch && queryMatch;
+    });
+
+    setProjects(cards);
+  }, [LoaderData, filter, location, query]);
 
   return (
     <>
       <Header/>
+      <GradientMouse />
       <ProjectsPageLayout>
-        <GradientMouse />
         <FilterPanel />
         {
           LoaderData === undefined ? <span>loading...</span> : 
