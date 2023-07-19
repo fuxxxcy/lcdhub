@@ -1,3 +1,4 @@
+import SearchIcon from "@/images/SearchIcon";
 import styled from "styled-components";
 
 const Panel = styled.form`
@@ -52,6 +53,7 @@ const FilterButton = styled.button`
 `;
 
 const SearchBar = styled.div`
+  display: flex;
   width: 309px;
   height: 35px;
   border-radius: 24px;
@@ -66,8 +68,7 @@ const SearchBarInput = styled.input`
   width: calc(100% - 16px);
   height: 100%;
   margin: 0px 8px;
-  padding: 2px;
-
+  margin-left: 31px;
   border: none;
   outline: none;
   background: none;
@@ -95,6 +96,7 @@ const FilterPanel = () => {
       </FilterLayout>
 
       <SearchBar>
+        <SearchIcon/>
         <SearchBarInput placeholder="Поиск" />
       </SearchBar>
     </Panel>
