@@ -1,62 +1,60 @@
 import SearchIcon from "@/images/SearchIcon";
+import { ChangeEvent, FormEvent, useState } from "react";
+import queryString from "query-string";
 import styled from "styled-components";
+import Search from "@/images/Search";
+import { useNavigate } from "react-router-dom";
 
 const Panel = styled.form`
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  gap: 20px 60px;
   width: fit-content;
-  margin: 50px auto;
-`;
+  margin: 0px auto 50px;
 
-const FilterLayout = styled.div`
-  width: fit-content;
-  border-radius: 24px;
-  border: 1px solid var(--primarly);
-  background: var(--background);
-
-  margin: 0 auto;
-  padding: 6px 0px;
-
-  display: flex;
-  justify-content: space-around;
-  
-  :last-child {
-    border: none;
+  @media (width > 768px) {
+    flex-direction: row;
   }
 `;
 
-const FilterButton = styled.button`
-  color: var(--secondary);
+const FilterLayout = styled.div`
+  box-sizing: border-box;
+  width: fit-content;
+  height: 40px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const FilterButton = styled.button<{ $active?: string | boolean | undefined }>`
   text-align: center;
-  font-family: Roboto;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
 
   width: auto;
-  height: 24px;
+  height: fit-content;
   padding: 0px 23px;
   border: none;
-  border-right: 1px solid var(--primarly);
+  ${({ $active }) => {return $active ? 
+    `
+      filter: drop-shadow(0px 0px 13px var(--secondary)); 
+      color: var(--secondary);
+    ` : `
+      color: var(--text-aditional);
+    `
+  }}
   background: none;
 
   display: flex;
   justify-content: center;
-
-  > div {
-    width: fit-content;
-    height: fit-content;
-    margin: auto;
-  }
 `;
 
 const SearchBar = styled.div`
-  display: flex;
+  position: relative;
   width: 309px;
-  height: 35px;
-  border-radius: 24px;
+  height: 40px;
+  border-radius: 0.5em;
   margin: auto;
 
   border: 1px solid var(--primarly);
@@ -68,36 +66,85 @@ const SearchBarInput = styled.input`
   width: calc(100% - 16px);
   height: 100%;
   margin: 0px 8px;
-  margin-left: 31px;
+  padding: 0px 25px;
   border: none;
   outline: none;
   background: none;
-  color: var(--secondary);
-  font-family: Roboto;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  color: var(--primarly);
+  font-size: 14px;
+`;
+
+const SearchBarSubmit = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 8px;
+  height: 21px;
+  aspect-ratio: 1 / 1;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  background: none;
 `;
 
 const FilterPanel = () => {
+  const navigate = useNavigate();
+  
+  const [filter, setFilter] = useState<string | undefined>(undefined);
+  const [query, setQuery] = useState<string | undefined>(undefined);
+
+  const handleFilterChange = (filter: string) => {
+    setFilter(filter);
+  };
+
+  const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
+  };
+
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const queryParams = queryString.stringify({
+      ...(filter && { filter }),
+      ...(query && { query }),
+    },
+    { encode: false });
+
+    navigate(queryParams ? `/projects?${queryParams}` : "/projects", { replace: true });
+  };
+
   return (
-    <Panel>
+    <Panel onSubmit={e => handleSearch(e)}>
       <FilterLayout>
-        <FilterButton>
-          <div>Все</div>
+        <FilterButton 
+          onClick={() => handleFilterChange("all")} 
+          $active={filter === "all"}
+        >
+          Все
+          </FilterButton>
+        <FilterButton 
+          onClick={() => handleFilterChange("testnets")}
+          $active={filter === "testnets"}
+        >
+          Тестнеты
         </FilterButton>
-        <FilterButton>
-          <div>Тестнеты</div>
-        </FilterButton>
-        <FilterButton>
-          <div>Ретродропы</div>
-        </FilterButton>
+        <FilterButton 
+          onClick={() => handleFilterChange("retrodrops")} 
+          $active={filter === "retrodrops"}
+        >
+          Ретродропы
+          </FilterButton>
       </FilterLayout>
 
       <SearchBar>
-        <SearchIcon/>
-        <SearchBarInput placeholder="Поиск" />
+        <SearchBarInput placeholder="Поиск" onChange={e => handleQueryChange(e)} />
+        <SearchBarSubmit>
+          <Search 
+            width="21px" 
+            height="21px" 
+            color={document.documentElement.style.getPropertyValue("--primarly")} 
+          />
+        </SearchBarSubmit>
       </SearchBar>
     </Panel>
   );

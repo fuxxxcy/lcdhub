@@ -14,22 +14,25 @@ const GuideCardsLayout = styled.div`
   }
 `;
 
-const GuideCards = () => {
-  const demonstrate: Project = {
-    id: "123",
-    name: "Крутое имя",
-    image: "123",
-    description: "Крутое длинное описание, которое я не знаю зачем пишу, ведь всё равно обрежу его."
-  }
+interface CardsProps {
+  cards: Project[] | undefined;
+}
 
+const GuideCards = ({ cards }: CardsProps) => {
   return (
     <GuideCardsLayout>
-      <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
-      <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
-      <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
-      <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
-      <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
-      <GuideCard id={demonstrate.id} name={demonstrate.name} image={demonstrate.image} description={demonstrate.description} />
+      {cards?.length === 0 ? 
+      <div>No data here</div> : 
+      cards?.map(card => {
+        return <GuideCard 
+          key={card.id}
+          id={card.id} 
+          name={card.name} 
+          image={card.image} 
+          description={card.description} 
+          filters={card.filters}
+        />
+      })}
     </GuideCardsLayout>
   );
 };

@@ -10,7 +10,7 @@ interface Config {
     AURA_INSTANCENAME: string;
 };
 
-export const config: Config = {
+export const neo4jConfig: Config = {
     NEO4J_URI: process.env.NEO4J_URI ?? "",
     NEO4J_USERNAME: process.env.NEO4J_USERNAME ?? "",
     NEO4J_PASSWORD: process.env.NEO4J_PASSWORD ?? "",
