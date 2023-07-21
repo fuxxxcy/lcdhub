@@ -1,3 +1,4 @@
+import SearchIcon from "@/images/SearchIcon";
 import { ChangeEvent, FormEvent, useState } from "react";
 import queryString from "query-string";
 import styled from "styled-components";
@@ -66,7 +67,6 @@ const SearchBarInput = styled.input`
   height: 100%;
   margin: 0px 8px;
   padding: 0px 25px;
-
   border: none;
   outline: none;
   background: none;
