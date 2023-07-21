@@ -1,10 +1,9 @@
-import FilterPanel from "@components/FilterPanel";
-import GradientMouse from "@components/GradientMouse";
-import GuideCards from "@components/GuideCards";
-import Header from "@components/Header";
+import { apiLink } from "@/AppRoutes";
+import { FilterPanel, GradientMouse, Header, GuideCards, PageNumber } from "@components";
+import { ProjectsPageLoader } from "@utils/loaders";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
-import { useLoaderData, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const ProjectsPageLayout = styled.div`
@@ -22,32 +21,37 @@ const ProjectsPageLayout = styled.div`
 `;
 
 interface LoaderDataProps {
-  data: Project[];
+  data: {
+    projects: Project[];
+    pageCount: number;
+  };
 }
 
 export default function ProjectsPage() {
-  const LoaderData = useLoaderData();
+  const [loaderData, setLoaderData] = useState<LoaderDataProps | string>();
+  const [pageCount, setPageCount] = useState<number>(1);
   const [projects, setProjects] = useState<Project[]>();
 
   const location = useLocation();
-  const queryParams = queryString.parse(location.search);
-  const filter = queryParams.filter as string | undefined;
-  const query = queryParams.query as string | undefined;
 
   useEffect(() => {
-    if (LoaderData === 'Network Error')  return;
+    const getData = async (filterParams: FilterParams) => {
+      setLoaderData(await ProjectsPageLoader({link: apiLink, filterParams}));
+    };
 
-    const { data } = LoaderData as LoaderDataProps;
+    const filterParams = queryString.parse(location.search) as FilterParams;
 
-    const cards: Project[] = data.filter((card) => {
-      const filterMatch = filter === "all" || filter === undefined || card.filters.includes(filter);
-      const queryMatch = query === undefined || card.name.includes(query);
+    getData(filterParams);
+  }, [location]);
 
-      return filterMatch && queryMatch;
-    });
+  useEffect(() => {
+    if (loaderData === 'Network Error' || !(loaderData as LoaderDataProps)?.data)  return;
 
-    setProjects(cards);
-  }, [LoaderData, filter, location, query]);
+    const { data } = loaderData as LoaderDataProps;
+
+    setProjects(data.projects);
+    setPageCount(data.pageCount);
+  }, [loaderData]);
 
   return (
     <>
@@ -56,10 +60,11 @@ export default function ProjectsPage() {
       <ProjectsPageLayout>
         <FilterPanel />
         {
-          LoaderData === undefined ? <span>loading...</span> : 
+          loaderData === undefined ? <span>loading...</span> : 
           projects === undefined ? <span>no data here</span> : 
           <GuideCards cards={projects} />
         }
+        <PageNumber maxPage={pageCount} />
       </ProjectsPageLayout>
     </>
   );

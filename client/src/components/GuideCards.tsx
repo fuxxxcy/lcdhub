@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import GuideCard from "./GuideCard";
+import { GuideCard } from ".";
 
 const GuideCardsLayout = styled.div`
   max-width: 1200px;

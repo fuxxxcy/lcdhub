@@ -1,11 +1,14 @@
 import { FullProject } from "@utils/types/FullProject";
 import { Loader } from "@utils/types/Loader";
 import axios from "axios";
+import queryString from "query-string";
 
-const ProjectsPageLoader = async ({link}: Loader) => {
+const ProjectsPageLoader = async ({link, filterParams}: Loader & { filterParams: FilterParams }) => {
   try {
+    const queryParams = queryString.stringify(filterParams);
+
     const { data } = await axios.get<FullProject>(
-      `${link}/projects`,
+      `${link}/projects${queryParams && `?${queryParams}`}`,
       {
         headers: {
           Accept: 'application/json',

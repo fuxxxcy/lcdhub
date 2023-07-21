@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import queryString from "query-string";
 import styled from "styled-components";
-import Search from "@/images/Search";
+import { Search } from "@/assets/img";
 import { useNavigate } from "react-router-dom";
 
 const Panel = styled.form`
@@ -27,7 +27,7 @@ const FilterLayout = styled.div`
   align-items: center;
 `;
 
-const FilterButton = styled.button<{ $active?: string | boolean | undefined }>`
+const FilterButton = styled.button<{ $active?: boolean | undefined }>`
   text-align: center;
   font-size: 16px;
 
@@ -98,7 +98,7 @@ const FilterPanel = () => {
   };
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
+    setQuery(event.target.value.toLowerCase());
   };
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
@@ -110,7 +110,7 @@ const FilterPanel = () => {
     },
     { encode: false });
 
-    navigate(queryParams ? `/projects?${queryParams}` : "/projects", { replace: true });
+    navigate(`/projects${queryParams && `?${queryParams}`}`, { replace: true });
   };
 
   return (

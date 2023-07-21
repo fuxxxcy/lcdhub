@@ -1,6 +1,6 @@
-import TimeFrame from "@/images/TimeFrame";
+import { TimeFrame } from "@/assets/img";
 import { styled } from "styled-components";
-import TextFade from "./TextFade";
+import { TextFade } from ".";
 
 const GuideCardLayout = styled.div`
   width: 300px;
@@ -118,7 +118,7 @@ const GuideCard = ({id, name, image, description}: Project) => {
     <GuideCardLayout>
       <GuideCardTitle>
         <GuideCardLogo src={image} alt="place for logo" />
-        <GuideCardButton href={id}>Перейти</GuideCardButton>
+        <GuideCardButton href={`project/${id}`}>Перейти</GuideCardButton>
       </GuideCardTitle>
 
       <GuideCardContent>
@@ -145,7 +145,7 @@ const GuideCard = ({id, name, image, description}: Project) => {
         </GuideCardName>
         <GuideCardDescription>
           {description.slice(0, 120)}
-          <TextFade height="12px" $isneedtofade={"true"} />
+          <TextFade height="14px" $isneedtofade={"true"} />
         </GuideCardDescription>
       </GuideCardContent>
     </GuideCardLayout>

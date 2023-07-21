@@ -1,6 +1,6 @@
-import Panel from "@/images/Panel";
+import Panel from "@/assets/img/Panel";
 import styled from "styled-components";
-import Sidebar from "./Sidebar";
+import { Sidebar } from ".";
 import { useState } from "react";
 
 const HeaderLayout = styled.header`
