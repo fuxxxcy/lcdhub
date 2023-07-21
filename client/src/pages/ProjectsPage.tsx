@@ -1,5 +1,6 @@
 import { apiLink } from "@/AppRoutes";
 import { FilterPanel, GradientMouse, Header, GuideCards, PageNumber } from "@components";
+import Preloader from "@components/Preloader";
 import { ProjectsPageLoader } from "@utils/loaders";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
@@ -60,7 +61,7 @@ export default function ProjectsPage() {
       <ProjectsPageLayout>
         <FilterPanel />
         {
-          loaderData === undefined ? <span>loading...</span> : 
+          loaderData !== undefined ? <Preloader /> : 
           projects === undefined ? <span>no data here</span> : 
           <GuideCards cards={projects} />
         }
