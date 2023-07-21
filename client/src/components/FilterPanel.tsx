@@ -1,4 +1,3 @@
-import SearchIcon from "@/images/SearchIcon";
 import { ChangeEvent, FormEvent, useState } from "react";
 import queryString from "query-string";
 import styled from "styled-components";
