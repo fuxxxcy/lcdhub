@@ -61,7 +61,7 @@ export default function ProjectsPage() {
       <ProjectsPageLayout>
         <FilterPanel />
         {
-          loaderData !== undefined ? <Preloader /> : 
+          loaderData === undefined ? <Preloader /> : 
           projects === undefined ? <span>no data here</span> : 
           <GuideCards cards={projects} />
         }
