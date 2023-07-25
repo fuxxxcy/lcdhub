@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { driver } from "../../driver/Neo4j.connect";
-import Project from "../../types/Project";
+import { Project } from "../../types";
 
 const query = async (req: Request, res: Response) => {
   try {

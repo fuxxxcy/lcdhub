@@ -12,6 +12,7 @@ const ProjectPageLoader = async ({params, link}: Loader) => {
         },
       }
     );
+    // console.log(data);
 
     return { data };
   } catch (error) {

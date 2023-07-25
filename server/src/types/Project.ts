@@ -5,4 +5,4 @@ type Project = {
     description: string
 };
 
-export default Project;
+export { Project };

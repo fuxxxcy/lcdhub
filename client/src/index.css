@@ -9,6 +9,9 @@
     --text-title: #FFFFFF;
     --text-additional: color-mix(in srgb, transparent 20%, var(--text-title) 80%);
     --text: color-mix(in srgb, transparent 50%, var(--text-title) 50%);
+
+    --drop-shadow-big: drop-shadow(0px 0px 40px rgba(0, 0, 0, 0.63));
+    --drop-shadow-small: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.63));
 }
 
 ::-webkit-scrollbar {

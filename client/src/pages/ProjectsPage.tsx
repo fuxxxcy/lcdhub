@@ -1,5 +1,5 @@
 import { apiLink } from "@/AppRoutes";
-import { FilterPanel, GradientMouse, Header, GuideCards, PageNumber } from "@components";
+import { FilterPanel, GradientMouse, Header, GuideCards, PageNumber, LoaderSeparator } from "@components";
 import Preloader from "@components/Preloader";
 import { ProjectsPageLoader } from "@utils/loaders";
 import queryString from "query-string";
@@ -13,7 +13,7 @@ const ProjectsPageLayout = styled.div`
   left: 0px;
   width: 100%;
   min-height: 100%;
-  padding: 50px 0px;
+  padding: 80px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,15 +58,17 @@ export default function ProjectsPage() {
     <>
       <Header/>
       <GradientMouse />
-      <ProjectsPageLayout>
-        <FilterPanel />
-        {
-          loaderData === undefined ? <Preloader /> : 
-          projects === undefined ? <span>no data here</span> : 
-          <GuideCards cards={projects} />
-        }
-        <PageNumber maxPage={pageCount} />
-      </ProjectsPageLayout>
+      <LoaderSeparator data={loaderData}>
+        <ProjectsPageLayout>
+          <FilterPanel />
+          {projects === undefined ? 
+            <span>no data here</span> : 
+            <GuideCards cards={projects} />
+          }
+          <PageNumber maxPage={pageCount} />
+        </ProjectsPageLayout>
+      </LoaderSeparator>
+      
     </>
   );
 };

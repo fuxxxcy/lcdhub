@@ -1,9 +1,11 @@
+import { Integer } from "neo4j-driver";
+
 type Step = {
-    number: number,
+    number: Integer | number,
     name: string,
     description: string,
-    cost: number | string,
-    time: number
+    cost: Integer | number,
+    time: Integer | number
 };
 
-export default Step;
+export { Step };

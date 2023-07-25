@@ -4,4 +4,4 @@ type  FilterParams = {
   page?: string | undefined,
 };
 
-export default FilterParams;
+export { FilterParams };

@@ -1,13 +1,17 @@
-import { FullProject } from "@utils/types/FullProject";
 import { Loader } from "@utils/types/Loader";
 import axios from "axios";
 import queryString from "query-string";
+
+interface DataProps {
+  projects: Project[];
+  pageCount: number;
+};
 
 const ProjectsPageLoader = async ({link, filterParams}: Loader & { filterParams: FilterParams }) => {
   try {
     const queryParams = queryString.stringify(filterParams);
 
-    const { data } = await axios.get<FullProject>(
+    const { data } = await axios.get<DataProps>(
       `${link}/projects${queryParams && `?${queryParams}`}`,
       {
         headers: {
