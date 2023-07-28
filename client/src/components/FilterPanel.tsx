@@ -1,15 +1,14 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import queryString from "query-string";
 import styled from "styled-components";
 import { Search } from "@/assets/img";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Panel = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px 60px;
   width: fit-content;
-  margin: 0px auto 50px;
 
   @media (width > 768px) {
     flex-direction: row;
@@ -88,9 +87,17 @@ const SearchBarSubmit = styled.button`
 
 const FilterPanel = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   
-  const [filter, setFilter] = useState<string | undefined>(undefined);
-  const [query, setQuery] = useState<string | undefined>(undefined);
+  const [filter, setFilter] = useState<string>();
+  const [query, setQuery] = useState<string>();
+
+  useEffect(()=> {
+    const filterParams: FilterParams = queryString.parse(location.search);
+
+    setFilter(filterParams.filter);
+    setQuery(filterParams.query);
+  }, [location]);
 
   const handleFilterChange = (filter: string) => {
     setFilter(filter);

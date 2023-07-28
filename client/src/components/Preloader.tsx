@@ -18,7 +18,7 @@ const Preloader = () => {
 
   return (
     <div id="preloader">
-      <img ref={imageRef} src="/loader.png" width="50px" height="50px" alt="" />
+      <img ref={imageRef} src="/loader.png" style={{height: 64 / 1080 * window.innerHeight, aspectRatio: "1 / 1"}} alt="" />
     </div>
   );
 };

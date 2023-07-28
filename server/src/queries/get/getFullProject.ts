@@ -4,10 +4,10 @@ import { FullProject, FullProjectNeo4j, Step } from "../../types";
 import { Integer } from "neo4j-driver";
 
 const query = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const session = driver.session();
 
   try {
-    const session = driver.session();
+    const { id } = req.params;
 
     const result = await session.run(`
       MATCH (project:Project{id: "${id}"})
@@ -50,7 +50,9 @@ const query = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error executing Neo4j query:', error);
     res.status(500).json({ error: 'Server error' });
-  }
+  } finally {
+    session.close();
+  };
 };
 
 export default query;

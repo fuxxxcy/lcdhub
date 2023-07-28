@@ -1,1 +1,2 @@
-export { default as postDemoMdFile } from "./postDemoMdFile";
+export { default as postAuthDiscord } from "./postAuthDiscord";
+export { default as postUser } from "./postUser";

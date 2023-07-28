@@ -1,6 +1,5 @@
 import { apiLink } from "@/AppRoutes";
 import { FilterPanel, GradientMouse, Header, GuideCards, PageNumber, LoaderSeparator } from "@components";
-import Preloader from "@components/Preloader";
 import { ProjectsPageLoader } from "@utils/loaders";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
@@ -17,6 +16,7 @@ const ProjectsPageLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 50px;
   z-index: 1;
   backdrop-filter: blur(180px);
 `;
@@ -50,25 +50,24 @@ export default function ProjectsPage() {
 
     const { data } = loaderData as LoaderDataProps;
 
+    data.projects.reverse();
+
     setProjects(data.projects);
     setPageCount(data.pageCount);
   }, [loaderData]);
 
   return (
-    <>
+    <LoaderSeparator data={loaderData}>
       <Header/>
       <GradientMouse />
-      <LoaderSeparator data={loaderData}>
-        <ProjectsPageLayout>
-          <FilterPanel />
-          {projects === undefined ? 
-            <span>no data here</span> : 
-            <GuideCards cards={projects} />
-          }
-          <PageNumber maxPage={pageCount} />
-        </ProjectsPageLayout>
-      </LoaderSeparator>
-      
-    </>
+      <ProjectsPageLayout>
+        <FilterPanel />
+        {projects === undefined ? 
+          <span>no data here</span> : 
+          <GuideCards cards={projects} />
+        }
+        <PageNumber maxPage={pageCount} />
+      </ProjectsPageLayout>
+    </LoaderSeparator>
   );
 };

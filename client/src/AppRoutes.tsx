@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { ErrorPage, ProjectPage, ProjectsPage } from "@pages";
+import { Authentification, ErrorPage, ProjectPage, ProjectsPage } from "@pages";
 
 export const apiLink = "http://localhost:4000";
 
@@ -20,6 +20,10 @@ const AppRoutes = createBrowserRouter([
   {
     path: "/error/:errorType",
     element: <ErrorPage />,
+  },
+  {
+    path: "/auth/discord",
+    element: <Authentification type="discord" />
   }
 ]);
 

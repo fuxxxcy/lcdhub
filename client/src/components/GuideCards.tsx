@@ -3,15 +3,24 @@ import { GuideCard } from ".";
 
 const GuideCardsLayout = styled.div`
   max-width: 1200px;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
+  width: min-content;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 50px;
 
-  @media (width <= 768px) {
-    width: min-content;
+  @media (1100px >= width > 768px) {
+    grid-template-columns: 1fr 1fr;
+    width: fit-content;
   }
+
+  @media (width > 1100px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    width: fit-content;
+  }
+`;
+
+const GuideCardWrapLayout = styled.div`
+  margin: auto;
 `;
 
 interface CardsProps {
@@ -24,14 +33,17 @@ const GuideCards = ({ cards }: CardsProps) => {
       {cards?.length === 0 ? 
       <div>No data here</div> : 
       cards?.map(card => {
-        return <GuideCard 
-          key={card.id}
-          id={card.id} 
-          name={card.name} 
-          image={card.image} 
-          description={card.description} 
-          filters={card.filters}
-        />
+        return (
+          <GuideCardWrapLayout key={card.id}>
+            <GuideCard 
+              id={card.id} 
+              name={card.name} 
+              image={card.image} 
+              description={card.description} 
+              filters={card.filters}
+            />
+          </GuideCardWrapLayout>
+        )
       })}
     </GuideCardsLayout>
   );

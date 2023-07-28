@@ -3,12 +3,13 @@ import { driver } from "../../driver/Neo4j.connect";
 import { Project } from "../../types";
 
 const query = async (req: Request, res: Response) => {
+  const session = driver.session();
+  
   try {
     const queryParams = req.query;
     const { filter, query, page } = queryParams;
     let pageNumber = page ? Number.parseInt(page as string) : 1;
 
-    const session = driver.session();
 
     const result = await session.run(`
       MATCH (projects:Project)
@@ -28,7 +29,9 @@ const query = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error executing Neo4j query:', error);
     res.status(500).json({ error: 'Server error' });
-  }
+  } finally {
+    session.close();
+  };
 };
 
 export default query;

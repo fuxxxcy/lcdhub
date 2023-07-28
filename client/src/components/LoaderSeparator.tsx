@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import anime, { AnimeParams } from "animejs";
 
 const LoaderSeparatorLayout = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   left: 0px;
@@ -38,7 +38,6 @@ const LoaderSeparator = ({data, children}: LoaderSeparatorProps) => {
     let animeParams: AnimeParams = {
       targets: loaderRef.current,
       opacity: 0,
-      scale: 0,
       duration: 1500,
       delay: 1000,
       easing: 'easeOutExpo',
