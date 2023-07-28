@@ -2,6 +2,7 @@ import Panel from "@/assets/img/Panel";
 import styled from "styled-components";
 import { Sidebar } from ".";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HeaderLayout = styled.header`
   box-sizing: border-box;
@@ -35,12 +36,13 @@ const Logo = styled.img`
 
 const Header = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  const navigate = useNavigate()
 
   return (
     <>
       <HeaderLayout>
         <HeaderItem>
-          <Logo src={process.env.PUBLIC_URL + "/site-logo.svg"} />
+          <Logo src={process.env.PUBLIC_URL + "/site-logo.svg"} onClick={() => navigate("/")}/>
         </HeaderItem>
         <HeaderItem onClick={() => setSidebarVisible(!sidebarVisible)}>
           <Panel color="#FFFFFF" />

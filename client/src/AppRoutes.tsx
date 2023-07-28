@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Authentification, ErrorPage, ProjectPage, ProjectsPage } from "@pages";
+import { Authentification, ErrorPage, FillBalancePage, ProjectPage, ProjectsPage } from "@pages";
 
 export const apiLink = "http://localhost:4000";
 
@@ -24,6 +24,10 @@ const AppRoutes = createBrowserRouter([
   {
     path: "/auth/discord",
     element: <Authentification type="discord" />
+  },
+  {
+    path: "/fillbalance",
+    element: <FillBalancePage/>
   }
 ]);
 

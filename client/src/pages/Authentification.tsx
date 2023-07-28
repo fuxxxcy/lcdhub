@@ -1,8 +1,9 @@
 import { apiLink } from "@/AppRoutes";
+import LoaderSeparator from "@components/LoaderSeparator";
 import UserContext from "@utils/context/UserContext";
 import { TokenLoader, UserLoader } from "@utils/loaders";
 import { useContext, useMemo, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface AuthentificationProps {
   type: "discord"
@@ -22,7 +23,8 @@ const Authentification = ({type}: AuthentificationProps) => {
 
     const { token } = response.data;
     localStorage.setItem('jwtToken', token);
-  }, [type]);
+    navigate("/");
+  }, [type, user, updateUser]);
   
   useMemo(async () => {
     if (!userRef.current) {
@@ -34,17 +36,16 @@ const Authentification = ({type}: AuthentificationProps) => {
         navigate("/");
       }
     }
-  }, [navigate, updateUser]);
+  }, [navigate, user, updateUser]);
 
   return (
-    // <LoaderSeparator data={user}>
-    //   <div>
-    //     {user && <img src={user.img} alt="" />}
+    <LoaderSeparator data={user}>
+      <div>
+        {user && <img src={user.img} alt="" />}
 
-    //     <h1>{user?.name}</h1>
-    //   </div>
-    // </LoaderSeparator>
-    <></>
+        <h1>{user?.name}</h1>
+      </div>
+    </LoaderSeparator>
   );
 };
 
