@@ -8,10 +8,10 @@ interface UserContextProviderProps {
 };
 
 const UserContextProvider = ({children}: UserContextProviderProps) => {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<User>();
   const userRef = useRef<User | undefined>(user);
 
-  const updateUser = (newUser: User) => {
+  const updateUser = (newUser: User | undefined) => {
     setUser(newUser);
   };
 
@@ -20,8 +20,8 @@ const UserContextProvider = ({children}: UserContextProviderProps) => {
       const token = localStorage.getItem('jwtToken');
       const newUser = await UserLoader({ link: apiLink, token });
       if (typeof newUser !== "string") {
-        userRef.current = newUser.data;
-        updateUser(userRef.current)
+        userRef.current = newUser;
+        updateUser(userRef.current);
       }
     }
   }, []);

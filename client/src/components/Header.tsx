@@ -1,6 +1,6 @@
-import Panel from "@/assets/img/Panel";
+// import Panel from "/assets/img/Panel.svg";
 import styled from "styled-components";
-import { Sidebar } from ".";
+import Sidebar from "./Sidebar";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +45,7 @@ const Header = () => {
           <Logo src={process.env.PUBLIC_URL + "/site-logo.svg"} onClick={() => navigate("/")}/>
         </HeaderItem>
         <HeaderItem onClick={() => setSidebarVisible(!sidebarVisible)}>
-          <Panel color="#FFFFFF" />
+          <img src="/assets/img/Panel.svg" alt="" />
         </HeaderItem>
       </HeaderLayout>
       <Sidebar isVisible={sidebarVisible} />

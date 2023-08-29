@@ -3,7 +3,7 @@ import LoaderSeparator from "@components/LoaderSeparator";
 import UserContext from "@utils/context/UserContext";
 import { TokenLoader, UserLoader } from "@utils/loaders";
 import { useContext, useMemo, useRef } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface AuthentificationProps {
   type: "discord"
@@ -24,19 +24,20 @@ const Authentification = ({type}: AuthentificationProps) => {
     const { token } = response.data;
     localStorage.setItem('jwtToken', token);
     navigate("/");
-  }, [type, user, updateUser]);
+  }, [type, navigate]);
   
   useMemo(async () => {
     if (!userRef.current) {
       const token = localStorage.getItem('jwtToken');
       const newUser = await UserLoader({ link: apiLink, token });
+      
       if (typeof newUser !== "string") {
-        userRef.current = newUser.data;
+        userRef.current = newUser;
         updateUser!!(userRef.current)
         navigate("/");
       }
     }
-  }, [navigate, user, updateUser]);
+  }, [navigate, updateUser]);
 
   return (
     <LoaderSeparator data={user}>

@@ -1,6 +1,5 @@
 import UserContext from "@utils/context/UserContext";
-import { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -30,17 +29,14 @@ interface SidebarProps {
 };
 
 const Sidebar = ({ isVisible }: SidebarProps) => {
-  const { user } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const onLogout = () => {
-    localStorage.removeItem('jwtToken')
-    navigate("/")
-  }
-
-  useEffect(() => {
-    console.log(user)
-  }, [])
+    localStorage.removeItem('jwtToken');
+    updateUser!!(undefined);
+    navigate("/");
+  };
 
   return (
     <SidebarLayout style={{transform: isVisible ? "translateX(-100%)" : "translateX(0%)"}}>

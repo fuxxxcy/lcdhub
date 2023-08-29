@@ -8,7 +8,13 @@ const CreateUser = ({id, name, img, wallet, key}: User) => {
     console.log("Creating user");
 
     session.run(`
-      CREATE (:User{id: "${id}", name: "${name}", img: "${img}", wallet: ${wallet ?? 0.00} ${key && `, key: "${key}"`}})
+      CREATE (:User{
+        id: "${id}", 
+        name: "${name}", 
+        img: "${img}", 
+        wallet: ${wallet ?? 0.00} 
+        ${key && `, key: "${key}"`}
+      })
     `);
   } finally {
     session.close();

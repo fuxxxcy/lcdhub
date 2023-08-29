@@ -1,19 +1,10 @@
 import { createContext } from "react";
 
-type UserContextType = {
-  user?: User | undefined;
-  updateUser?: (newUser: User) => void;
+type UserContextType<T> = {
+  user?: T | undefined;
+  updateUser?: (newUser: T | undefined) => void;
 };
   
-const UserContext = createContext<UserContextType>({});
+const UserContext = createContext<UserContextType<User>>({});
 
 export default UserContext;
-
-// export const UserProvider = ({children}: any) => {
-//   return (
-//     <UserContext.Provider value={{}}>
-//       {children}
-//     </UserContext.Provider>
-//   )
-// }
-

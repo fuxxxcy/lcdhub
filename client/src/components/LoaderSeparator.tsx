@@ -57,7 +57,7 @@ const LoaderSeparator = ({data, children}: LoaderSeparatorProps) => {
         <Preloader />
         {data &&
         <video controls={false} autoPlay muted loop={false}>
-          <source src="/nextloader.mp4" type="video/mp4" />
+          <source src="/assets/nextloader.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>}
       </LoaderSeparatorLayout>)}

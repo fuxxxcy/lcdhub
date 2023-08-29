@@ -59,7 +59,7 @@ export default function ProjectsPage() {
   return (
     <LoaderSeparator data={loaderData}>
       <Header/>
-      <GradientMouse />
+      {/* <GradientMouse /> */}
       <ProjectsPageLayout>
         <FilterPanel />
         {projects === undefined ? 

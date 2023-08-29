@@ -21,6 +21,7 @@ const GuideCardsLayout = styled.div`
 
 const GuideCardWrapLayout = styled.div`
   margin: auto;
+  border-radius: 1em;
 `;
 
 interface CardsProps {

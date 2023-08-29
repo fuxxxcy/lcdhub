@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import queryString from "query-string";
 import styled from "styled-components";
-import { Search } from "@/assets/img";
+// import Search from "@/assets/img/Search.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Panel = styled.form`
@@ -145,11 +145,7 @@ const FilterPanel = () => {
       <SearchBar>
         <SearchBarInput placeholder="Поиск" onChange={e => handleQueryChange(e)} />
         <SearchBarSubmit>
-          <Search 
-            width="21px" 
-            height="21px" 
-            color={document.documentElement.style.getPropertyValue("--primarly")} 
-          />
+          <img src="/assets/img/Search.svg" alt="" />
         </SearchBarSubmit>
       </SearchBar>
     </Panel>

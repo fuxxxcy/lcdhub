@@ -6,7 +6,7 @@ const query = async (req: Request, res: Response) => {
   try {
     const { token } = req.body;
 
-    const userData = jwt.verify(token, jwtConfig.JWT_SECRET_KEY);
+    const userData = jwt.verify(token, jwtConfig.JWT_SECRET_KEY) ?? undefined;
 
     res.json(userData);
   } catch(error) {

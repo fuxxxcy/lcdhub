@@ -1,12 +1,11 @@
-import { TimeFrame } from "@/assets/img";
+// import TimeFrame from "@/assets/img/TimeFrame.svg";
 import { styled } from "styled-components";
-import { TextFade } from ".";
+import { ProtectedContent, TextFade } from ".";
 
 const GuideCardLayout = styled.div`
   width: 300px;
   height: 170px;
   padding: 10px;
-  border-radius: 1em;
   display: grid;
   grid-template-columns: 120px 160px;
   gap: 10px;
@@ -115,40 +114,42 @@ const GuideCardDescription = styled.div`
 
 const GuideCard = ({id, name, image, description}: Project) => {
   return (
-    <GuideCardLayout>
-      <GuideCardTitle>
-        <GuideCardLogo src={image} alt="place for logo" />
-        <GuideCardButton href={`project/${id}`}>Перейти</GuideCardButton>
-      </GuideCardTitle>
+    <ProtectedContent isOpen={id === ""}>
+      <GuideCardLayout>
+        <GuideCardTitle>
+          <GuideCardLogo src={image} alt="place for logo" />
+          <GuideCardButton href={`project/${id}`}>Перейти</GuideCardButton>
+        </GuideCardTitle>
 
-      <GuideCardContent>
-        <GuideCardInfo>
-          <GuideCardInfoItem>
-            <TimeFrame color={document.documentElement.style.getPropertyValue("--text-additional")} />
-            <GuideCardInfoText>2 мин</GuideCardInfoText>
-          </GuideCardInfoItem>
-          <GuideCardInfoItem>
-            {
-              id !== undefined ?
-                <GuideCardInfoText>Бесплатно</GuideCardInfoText> :
-                <>
-                  <GuideCardInfoIcon></GuideCardInfoIcon>
-                  <GuideCardInfoText>Бесплатно</GuideCardInfoText>
-                </>
-            }
-          </GuideCardInfoItem>
-        </GuideCardInfo>
+        <GuideCardContent>
+          <GuideCardInfo>
+            <GuideCardInfoItem>
+              <img src="/img/TimeFrame.svg" alt="" />
+              <GuideCardInfoText>2 мин</GuideCardInfoText>
+            </GuideCardInfoItem>
+            <GuideCardInfoItem>
+              {
+                id !== undefined ?
+                  <GuideCardInfoText>Бесплатно</GuideCardInfoText> :
+                  <>
+                    <GuideCardInfoIcon></GuideCardInfoIcon>
+                    <GuideCardInfoText>Бесплатно</GuideCardInfoText>
+                  </>
+              }
+            </GuideCardInfoItem>
+          </GuideCardInfo>
 
-        <GuideCardName>
-          {name}
-          <TextFade height="100%" $isneedtofade={(name.length >= 18).toString()} />
-        </GuideCardName>
-        <GuideCardDescription>
-          {description.slice(0, 120)}
-          <TextFade height="14px" $isneedtofade={"true"} />
-        </GuideCardDescription>
-      </GuideCardContent>
-    </GuideCardLayout>
+          <GuideCardName>
+            {name}
+            <TextFade height="100%" $isneedtofade={(name.length >= 18).toString()} />
+          </GuideCardName>
+          <GuideCardDescription>
+            {description.slice(0, 120)}
+            <TextFade height="14px" $isneedtofade={"true"} />
+          </GuideCardDescription>
+        </GuideCardContent>
+      </GuideCardLayout>
+    </ProtectedContent>
   );
 };
 

@@ -8,5 +8,5 @@ export { default as MarkdownRenderer } from "./MarkdownRenderer";
 export { default as PageNumber } from "./PageNumber";
 export { default as Preloader } from "./Preloader";
 export { default as ProjectSteps } from "./ProjectSteps";
-export { default as Sidebar } from "./Sidebar";
 export { default as TextFade } from "./TextFade";
+export { default as ProtectedContent } from "./ProtectedContent";
