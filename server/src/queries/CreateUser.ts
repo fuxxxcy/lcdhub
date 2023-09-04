@@ -1,7 +1,7 @@
 import { driver } from "../driver/Neo4j.connect";
 import { User } from "../types/User";
 
-const CreateUser = ({id, name, img, wallet, key}: User) => {
+const CreateUser = (user: User) => {
   const session = driver.session();
   
   try {
@@ -9,11 +9,13 @@ const CreateUser = ({id, name, img, wallet, key}: User) => {
 
     session.run(`
       CREATE (:User{
-        id: "${id}", 
-        name: "${name}", 
-        img: "${img}", 
-        wallet: ${wallet ?? 0.00} 
-        ${key && `, key: "${key}"`}
+        id: "${user.id}", 
+        name: "${user.name}", 
+        img: "${user.img}", 
+        role: "${user.role}"
+        ${user.role === "USER" && `, canViewKeys: ${user.canViewKeys}`}
+        ${user.role === "ADMIN" && `, canViewKeys: ${user.canViewKeys || []}, canEditKeys: ${user.canEditKeys || []}`}
+        ${user.key && `, key: "${user.key}"`}
       })
     `);
   } finally {

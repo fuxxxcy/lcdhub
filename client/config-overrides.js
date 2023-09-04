@@ -7,7 +7,8 @@ module.exports = function override(config) {
     '@components': path.resolve(__dirname, 'src/components'),
     '@pages': path.resolve(__dirname, 'src/pages'),
     '@utils': path.resolve(__dirname, 'src/utils'),
-    '@images': path.resolve(__dirname, 'src/assets/img'),
+    '@images': path.resolve(__dirname, 'public/assets/img'),
+    '@component-styles': path.resolve(__dirname, 'src/components/styles'),
   };
 
   return config;

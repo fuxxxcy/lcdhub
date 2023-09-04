@@ -3,12 +3,12 @@ import axios from "axios";
 
 const UserLoader = async ({link, token}: Loader & {token: string | null}) => {
   try {
-    // console.log(token)
     const response = token === null ? undefined : await axios.post<User | undefined>(
       `${link}/user`,
       { token }
     );
 
+    console.log(response?.data)
     return response?.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

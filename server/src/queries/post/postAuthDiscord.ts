@@ -15,11 +15,9 @@ const query = async (req: Request, res: Response) => {
       },
     });
 
-    const user: User = await CheckUser({
-      id: data.id,
-      name: data.username,
-      img: `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.jpg`,
-    });
+    const user: User = await CheckUser(data as User);
+
+    console.log(user);
 
     const token = jwt.sign(user, jwtConfig.JWT_SECRET_KEY, {
       expiresIn: '14d',

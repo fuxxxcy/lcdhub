@@ -1,5 +1,12 @@
 import { apiLink } from "@/AppRoutes";
-import { FilterPanel, GradientMouse, Header, GuideCards, PageNumber, LoaderSeparator } from "@components";
+import { 
+  FilterPanel, 
+  GradientMouse, 
+  Header, 
+  GuideCards, 
+  PageNumber, 
+  Preloader 
+} from "@components";
 import { ProjectsPageLoader } from "@utils/loaders";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
@@ -57,7 +64,7 @@ export default function ProjectsPage() {
   }, [loaderData]);
 
   return (
-    <LoaderSeparator data={loaderData}>
+    <Preloader data={loaderData}>
       <Header/>
       {/* <GradientMouse /> */}
       <ProjectsPageLayout>
@@ -68,6 +75,6 @@ export default function ProjectsPage() {
         }
         <PageNumber maxPage={pageCount} />
       </ProjectsPageLayout>
-    </LoaderSeparator>
+    </Preloader>
   );
 };

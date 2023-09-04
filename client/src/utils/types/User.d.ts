@@ -3,5 +3,17 @@ type User = {
   name: string;
   img?: string | undefined;
   key?: string | undefined;
-  wallet?: number | undefined;
-};
+} & (
+  | {
+    role: "USER";
+    canViewKeys: string[];
+  }
+  | {
+    role: "ADMIN";
+    canViewKeys: string[];
+    canEditKeys: string[];
+  }
+  | {
+    role: "OWNER";
+  }
+);

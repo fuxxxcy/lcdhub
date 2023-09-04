@@ -1,5 +1,5 @@
 import { apiLink } from "@/AppRoutes";
-import LoaderSeparator from "@components/LoaderSeparator";
+import LoaderSeparator from "@components/Preloader";
 import UserContext from "@utils/context/UserContext";
 import { TokenLoader, UserLoader } from "@utils/loaders";
 import { useContext, useMemo, useRef } from "react";

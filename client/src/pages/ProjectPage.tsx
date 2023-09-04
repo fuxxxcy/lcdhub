@@ -1,10 +1,15 @@
 import { apiLink } from "@/AppRoutes";
-import { LoaderSeparator, ProjectSteps } from "@components";
+import { 
+  LoaderSeparator, 
+  ProjectSteps, 
+  ProjectTitle
+} from "@components";
 import { ProjectPageLoader } from "@utils/loaders";
 import { FullProject } from "@utils/types/FullProject";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import ErrorPage from "./ErrorPage";
 
 const ProjectPageLayout = styled.div`
   width: 80%;
@@ -37,11 +42,9 @@ export default function ProjectPage() {
   return (
     <ProjectPageLayout>
       <LoaderSeparator data={loaderData}>
-        {projectData === undefined ? <span>no data here</span> : 
+        {projectData === undefined ? <ErrorPage /> : 
         <>
-          <div>{projectData.name}</div>
-          <img src={projectData.image} alt="" width="200px" />
-          <div>{projectData.description}</div>
+          <ProjectTitle info={projectData as Project} />
           <ProjectSteps steps={projectData.steps} />
         </>}
       </LoaderSeparator>

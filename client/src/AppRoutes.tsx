@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Authentification, ErrorPage, FillBalancePage, ProjectPage, ProjectsPage } from "@pages";
 
-export const apiLink = "http://localhost:4000";
+export const apiLink = "http://127.0.0.1:4000";
 
 const AppRoutes = createBrowserRouter([
   {

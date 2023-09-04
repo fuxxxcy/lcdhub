@@ -1,7 +1,20 @@
-import anime, { AnimeParams } from "animejs";
-import { useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import anime from "animejs";
+import { AnimeParams } from "animejs";
+import { 
+  LoaderSeparatorLayout, 
+  PreloaderLayout, 
+  PreloaderSpinner 
+} from "./styles/Preloader";
 
-const Preloader = () => {
+interface PreloaderProps {
+  data: {} | undefined;
+  children?: string | JSX.Element | JSX.Element[];
+};
+
+const Preloader = ({data, children}: PreloaderProps) => {
+  const [showVideo, setShowVideo] = useState(true);
+  const loaderRef =useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
@@ -14,12 +27,43 @@ const Preloader = () => {
     };
 
     anime(animeParams);
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    let animeParams: AnimeParams = {
+      targets: loaderRef.current,
+      opacity: 0,
+      duration: 1500,
+      delay: 1000,
+      easing: 'easeOutExpo',
+      borderRadius: '50%',
+      filter: 'blur(200px)',
+      complete: () => {
+        setShowVideo(false);
+      }
+    };
+
+    data && anime(animeParams);
+  }, [data]);
 
   return (
-    <div id="preloader">
-      <img ref={imageRef} src="/assets/loader.png" style={{height: 64 / 1080 * window.innerHeight, aspectRatio: "1 / 1"}} alt="" />
-    </div>
+    <>
+      {showVideo && (<LoaderSeparatorLayout ref={loaderRef}>
+        <PreloaderLayout id="preloader">
+          <PreloaderSpinner 
+            ref={imageRef} 
+            src="/assets/loader.png"
+            alt="" 
+          />
+        </PreloaderLayout>
+        {data &&
+        <video controls={false} autoPlay muted loop={false}>
+          <source src="/assets/nextloader.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>}
+      </LoaderSeparatorLayout>)}
+      {children}
+    </>
   );
 };
 

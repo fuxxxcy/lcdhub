@@ -1,9 +1,19 @@
-import { Integer } from "neo4j-driver";
-
-type User = {
+export type User = {
   id: string;
   name: string;
   img?: string | undefined;
   key?: string | undefined;
-  wallet?: Integer | number | undefined;
-};
+} & (
+  | {
+    role: "USER";
+    canViewKeys: string[];
+  }
+  | {
+    role: "ADMIN";
+    canViewKeys: string[];
+    canEditKeys: string[];
+  }
+  | {
+    role: "OWNER";
+  }
+);
